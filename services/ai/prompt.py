@@ -19,3 +19,15 @@ class PromptIA:
         {self.data_text}                
 
         """
+
+        self.prompt_google_currency = f"""
+        Você é um analista financeiro especialista traga a cotação atual do dolar e do
+        euro e uma breve explicação do porque o aumento e ou baixa da moeda.
+        
+        """
+
+        self.prompt_google_selic = f"""
+        Você é um analista financeiro especialista traga o valor atual da taxa selic e uma breve explicação sobre o por que
+        deste valor atual.
+
+        """

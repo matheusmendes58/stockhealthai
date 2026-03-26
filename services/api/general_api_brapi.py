@@ -1,11 +1,14 @@
-"""This module represent general config api and treatment response"""
+"""This module represent general config api and treatment response, Some functions of this API do not work in free mode."""
 
 from brapi import Brapi
 from brapi.types import QuoteRetrieveResponse
-from utils.custom_exceptions.brapi_exceptions import GetStockError
-
-from config import settings
-
+from brapi.types.v2 import CurrencyRetrieveResponse, InflationRetrieveResponse, PrimeRateRetrieveResponse
+from utils.custom_exceptions.brapi_exceptions import (
+    GetStockError,
+    GetCurrencyError,
+    GetInflationError,
+    GetSelicError
+)
 
 class BrapiApi:
     """
@@ -16,7 +19,7 @@ class BrapiApi:
 
         self.client = Brapi(api_key=token)
         self.stock = ''
-        self.result_formated = None
+        self.result_formatted = None
 
 
     def get_stock(
@@ -24,7 +27,7 @@ class BrapiApi:
             tickers: str,
             period: str = '3mo',
             dividends: bool = False,
-            fundamental: bool = True) -> 'QuoteRetrieveResponse':
+            fundamental: bool = True) -> QuoteRetrieveResponse:
 
         """
         Retrieve stock data from the API.
@@ -44,7 +47,63 @@ class BrapiApi:
                 dividends=dividends,
                 fundamental=fundamental
             )
+
+            return response
+
         except Exception as e:
             raise GetStockError(ticker=tickers, original_error=e)
 
-        return response
+    def get_currency(self, currency: str = 'USD-BRL,EUR-BRL') -> CurrencyRetrieveResponse:
+        """
+        Retrieve currency values (USD - Dolar americano, EUR - Euro) - NO WORK FREE SIGNATURE API
+
+        :param currency: currency information to be returned
+        :return: CurrencyRetrieveResponse object
+        """
+
+        try:
+            response = self.client.v2.currency.retrieve(currency=currency)
+
+            return  response
+
+        except Exception as e:
+            raise GetCurrencyError(original_error=e)
+
+    def get_inflation(self, date: str) -> InflationRetrieveResponse:
+        """
+        Retrieve inflation country - NO WORK FREE SIGNATURE API
+
+        :param date: date from historical inflation country (format utilized -> 2026-01-01)
+
+        :return: InflationRetrieveResponse object
+        """
+
+        try:
+            response = self.client.v2.inflation.retrieve(
+                country='brazil',
+                historical=True,
+                start=date
+            )
+
+            return response
+
+        except Exception as e:
+            raise GetInflationError(original_error=e)
+
+    def get_selic(self) -> PrimeRateRetrieveResponse:
+        """
+        Retrieve basic interest rate country - NO WORK FREE SIGNATURE API
+
+        :return: PrimeRateRetrieveResponse object
+        """
+
+        try:
+            response = self.client.v2.prime_rate.retrieve(
+                country='brazil',
+                historical=False,
+            )
+
+            return response
+
+        except Exception as e:
+            raise GetSelicError(original_error=e)

@@ -3,6 +3,7 @@
 from brapi import Brapi
 from brapi.types import QuoteRetrieveResponse
 from brapi.types.v2 import CurrencyRetrieveResponse, InflationRetrieveResponse, PrimeRateRetrieveResponse
+from models.financial_dto import FinancialData
 from utils.custom_exceptions.brapi_exceptions import (
     GetStockError,
     GetCurrencyError,
@@ -18,9 +19,6 @@ class BrapiApi:
     def __init__(self, token: str):
 
         self.client = Brapi(api_key=token)
-        self.stock = ''
-        self.result_formatted = None
-
 
     def get_stock(
             self,
@@ -49,6 +47,50 @@ class BrapiApi:
             )
 
             return response
+
+        except Exception as e:
+            raise GetStockError(ticker=tickers, original_error=e)
+
+    def get_personal_stock(
+            self,
+            tickers: str,
+            period: str = '3mo',
+            dividends: bool = False,
+            fundamental: bool = True) -> FinancialData:
+
+        """
+        Retrieve personal stock data from the API.
+
+        :param tickers: Stock ticker symbol (e.g., 'AAPL', 'PETR4.SA')
+        :param period: Time range for the query (e.g., '1mo', '3mo', '1y')
+        :param dividends: Whether to include dividends data
+        :param fundamental: Whether to include fundamental data
+
+        :return: QuoteRetrieveResponse object
+        """
+
+        try:
+            response = self.client.quote.retrieve(
+                tickers=tickers,
+                range=period,
+                dividends=dividends,
+                fundamental=fundamental
+            ).results[0]
+
+            return FinancialData(
+                currency=response.currency,
+                fifty_two_week_low=response.fifty_two_week_low,
+                fifty_two_week_high=response.fifty_two_week_high,
+                fifty_two_week_range=response.fifty_two_week_range,
+                logo_url=response.logourl,
+                long_name=response.long_name,
+                short_name=response.short_name,
+                symbol=response.symbol,
+                regular_market_open=response.regular_market_open,
+                regular_market_previous_close=response.regular_market_previous_close,
+                regular_market_price=response.regular_market_price,
+                regular_market_day_range=response.regular_market_day_range
+            )
 
         except Exception as e:
             raise GetStockError(ticker=tickers, original_error=e)

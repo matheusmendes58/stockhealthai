@@ -15,10 +15,10 @@ class AllSettings:
     def __init__(self):
 
         #AI
-        self.google_token = os.getenv('GOOGLE_TOKEN')
+        self.google_token = None
 
         #BRAPI_API
-        self.brapi_api_token = os.getenv('BRAPI_API_TOKEN')
+        self.brapi_api_token = None
 
     def env_check(self) -> bool:
         """

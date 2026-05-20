@@ -1,7 +1,10 @@
 """UI stock search or main interface"""
 
 import dearpygui.dearpygui as dpg
+from config import settings
 from models.financial_dto import FinancialData
+from services.api.general_api_brapi import BrapiApi
+
 
 class SearchUi:
     """
@@ -34,6 +37,38 @@ class SearchUi:
         self.pos_x = int((viewport_width - window_width) / 2)
         self.pos_y = int((viewport_height - window_height) / 2)
 
+    def set_value_in_table(self):
+        """
+        Get value in DTO and update.
+
+        :return:
+        """
+
+        dpg.set_value(item='long_name_text', value=self.dto.long_name)
+        dpg.set_value(item='short_name_text', value=self.dto.short_name)
+        dpg.set_value(item='symbol_text', value=self.dto.symbol)
+        dpg.set_value(item='regular_market_price_text', value=self.dto.regular_market_price)
+        dpg.set_value(item='regular_market_open_text', value=self.dto.regular_market_open)
+        dpg.set_value(item='regular_market_previous_close_text', value=self.dto.regular_market_previous_close)
+        dpg.set_value(item='regular_market_day_range_text', value=self.dto.regular_market_day_range)
+        dpg.set_value(item='fifty_two_week_high_text', value=self.dto.fifty_two_week_high)
+        dpg.set_value(item='fifty_two_week_low_text', value=self.dto.fifty_two_week_low)
+        dpg.set_value(item='fifty_two_week_range_text', value=self.dto.fifty_two_week_range)
+
+    def search_stock(self):
+        """
+        Search stock in brapi
+
+        :return:
+        """
+
+        api_stock = BrapiApi(token=settings.brapi_api_token)
+
+        stock = dpg.get_value('input_acao')
+
+        self.dto = api_stock.get_personal_stock(tickers=stock)
+
+        self.set_value_in_table()
 
     def screen_stock_search(self):
         """
@@ -56,7 +91,11 @@ class SearchUi:
 
             dpg.add_text(label='DIGITE O NOME DA AÇÃO:', pos=(-510,63), show_label=True)
 
-            dpg.add_input_text(tag='input_texto', width=250, indent=180, callback='')
+            dpg.add_input_text(tag='input_acao', width=250, indent=180)
+
+            dpg.add_spacer(height=5)
+
+            dpg.add_button(label='BUSCAR', tag='find_stock', indent=5, callback=self.search_stock)
 
             dpg.add_spacer(height=10)
             dpg.add_separator()
@@ -79,40 +118,40 @@ class SearchUi:
 
                 with dpg.table_row():
                     dpg.add_text('Nome da ação: '.upper())
-                    dpg.add_text(f'{self.dto.long_name}')
+                    dpg.add_text('', tag='long_name_text')
 
                 with dpg.table_row():
                     dpg.add_text('Nome Abreviado: '.upper())
-                    dpg.add_text(f'{self.dto.short_name}')
+                    dpg.add_text('', tag='short_name_text')
 
                 with dpg.table_row():
                     dpg.add_text('Simbolo: '.upper())
-                    dpg.add_text(f'{self.dto.symbol}')
+                    dpg.add_text('', tag='symbol_text')
 
                 with dpg.table_row():
                     dpg.add_text('Preço da ação: '.upper())
-                    dpg.add_text(f'{self.dto.regular_market_price}')
+                    dpg.add_text('', tag='regular_market_price_text')
 
                 with dpg.table_row():
                     dpg.add_text('Preço de abertura: '.upper().upper())
-                    dpg.add_text(f'{self.dto.regular_market_open}')
+                    dpg.add_text('', tag='regular_market_open_text')
 
                 with dpg.table_row():
                     dpg.add_text('Preço de fechamento: '.upper())
-                    dpg.add_text(f'{self.dto.regular_market_previous_close}')
+                    dpg.add_text('', tag='regular_market_previous_close_text')
 
                 with dpg.table_row():
                     dpg.add_text('Preço do dia anterior: '.upper())
-                    dpg.add_text(f'{self.dto.regular_market_day_range}')
+                    dpg.add_text('', tag='regular_market_day_range_text')
 
                 with dpg.table_row():
                     dpg.add_text('Alta de preço nas ultimas 2 semanas: '.upper())
-                    dpg.add_text(f'{self.dto.fifty_two_week_high}')
+                    dpg.add_text('', tag='fifty_two_week_high_text')
 
                 with dpg.table_row():
                     dpg.add_text('Baixa de preço nas ultimas 2 semanas: '.upper())
-                    dpg.add_text(f'{self.dto.fifty_two_week_low}')
+                    dpg.add_text('', tag='fifty_two_week_low_text')
 
                 with dpg.table_row():
                     dpg.add_text('Variação de preço nas ultimas 2 semanas (média): '.upper())
-                    dpg.add_text(f'{self.dto.fifty_two_week_range}')
+                    dpg.add_text('', tag='fifty_two_week_range_text')

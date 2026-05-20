@@ -1,6 +1,6 @@
-from brapi import APIError
 
-class GetStockError(APIError):
+
+class GetStockError(Exception):
 
     def __init__(self, ticker: str, original_error: Exception):
         self.ticker = ticker
@@ -9,25 +9,25 @@ class GetStockError(APIError):
 
         super().__init__(self.message)
 
-class GetCurrencyError(APIError):
+class GetCurrencyError(Exception):
 
-    def __init__(self,original_error: Exception):
+    def __init__(self, original_error: Exception):
         self.original_error = original_error
         self.message = f'Error retrieving currency data: {str(original_error)}'
 
         super().__init__(self.message)
 
-class GetInflationError(APIError):
+class GetInflationError(Exception):
 
-    def __init__(self,original_error: Exception):
+    def __init__(self, original_error: Exception):
         self.original_error = original_error
         self.message = f'Error retrieving inflation data: {str(original_error)}'
 
         super().__init__(self.message)
 
-class GetSelicError(APIError):
+class GetSelicError(Exception):
 
-    def __init__(self,original_error: Exception):
+    def __init__(self, original_error: Exception):
         self.original_error = original_error
         self.message = f'Error retrieving Selic data: {str(original_error)}'
 

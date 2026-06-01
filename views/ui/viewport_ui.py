@@ -1,5 +1,7 @@
 """UI viewport and main interface"""
-
+#TODO Criar Views para os menus selic e dolar
+#TODO Trazer resultado da IA para o menu informações sobre dolar e selic.
+#TODO Melhorar informações sobre "primeiro passos"
 import dearpygui.dearpygui as dpg
 from config import settings
 

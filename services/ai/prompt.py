@@ -1,5 +1,6 @@
 # Prompt AI
-
+#TODO Arrumar comentario acima
+#TODO Arrumar prompt_google
 class PromptIA:
     """
     This class is just about PROMPT AI

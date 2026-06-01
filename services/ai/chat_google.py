@@ -1,5 +1,6 @@
 # All about google gemini
-
+#TODO Arrumar comentario acima
+#TODO Colocar custom exceptions nas funções
 from google import genai
 
 class AiGoogle:

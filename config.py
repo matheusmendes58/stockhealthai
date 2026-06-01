@@ -1,6 +1,7 @@
-
-# All settings in project is here example passwords, string connections, etc
-
+#All settings in project is here example passwords, string connections, etc
+#TODO Fazer uma função que pegue as credenciais em algum lugar
+#TODO para não ficar criando poups irritantes toda hora que abre o software.
+#TODO Arrumar comentario  acima sobre essa pagina de config
 import os
 from dotenv import load_dotenv
 

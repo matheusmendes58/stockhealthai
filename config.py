@@ -1,11 +1,7 @@
 #All settings in project is here example passwords, string connections, etc
-#TODO Fazer uma função que pegue as credenciais em algum lugar
-#TODO para não ficar criando poups irritantes toda hora que abre o software.
-#TODO Arrumar comentario  acima sobre essa pagina de config
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
+import os
+
 
 class AllSettings:
     """
@@ -16,10 +12,10 @@ class AllSettings:
     def __init__(self):
 
         #AI
-        self.google_token = None
+        self.google_token = os.getenv('GOOGLE_GEMINI')
 
         #BRAPI_API
-        self.brapi_api_token = None
+        self.brapi_api_token = os.getenv('BRAPI_API_TOKEN')
 
     def env_check(self) -> bool:
         """

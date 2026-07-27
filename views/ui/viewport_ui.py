@@ -1,5 +1,4 @@
 """UI viewport and main interface"""
-#TODO Criar Views para os menus selic e dolar
 #TODO Trazer resultado da IA para o menu informações sobre dolar e selic.
 #TODO Melhorar informações sobre "primeiro passos"
 import dearpygui.dearpygui as dpg
@@ -24,9 +23,9 @@ class ViewportUi:
                 dpg.add_menu_item(label="Adicionar".upper(), callback=self.credential_popup)
 
             with dpg.menu(label="informações".upper()):
-                dpg.add_menu_item(label="selic".upper(), callback=self.credential_popup)
+                dpg.add_menu_item(label="selic".upper(), callback=self.selic_window_information)
 
-                dpg.add_menu_item(label="dolar e euro".upper(), callback=self.credential_popup)
+                dpg.add_menu_item(label="dolar e euro".upper(), callback=self.dolar_euro_window_information)
 
         self.warning_popup()
 
@@ -69,6 +68,36 @@ class ViewportUi:
                 show_label=True
             )
 
+    def selic_window_information(self):
+        """
+        Create information window with selic
+
+        :return:
+        """
+
+        with dpg.window(label="INFORMAÇÕES SOBRE A SELIC", modal=True, show=True,height=700, width=900, pos=(190,10)):
+
+            dpg.add_text(
+                label='',
+                tag='information_selic_tag',
+                pos=(-600,50),
+                show_label=True
+            )
+
+    def dolar_euro_window_information(self):
+        """
+        Create information window with dolar
+
+        :return:
+        """
+
+        with dpg.window(label="INFORMAÇÕES SOBRE O DOLAR E EURO", modal=True, show=True, height=700, width=900, pos=(190, 10)):
+            dpg.add_text(
+                label='',
+                tag='information_selic_tag',
+                pos=(-600, 50),
+                show_label=True
+            )
 
     def warning_popup(self):
         """

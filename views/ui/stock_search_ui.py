@@ -1,5 +1,5 @@
 """UI stock search or main interface"""
-
+#TODO Mostrar erro na UI quando não achar ação especifica
 import dearpygui.dearpygui as dpg
 from config import settings
 from models.financial_dto import FinancialData

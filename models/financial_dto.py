@@ -20,7 +20,8 @@ class FinancialData:
             regular_market_price: float = None,
             regular_market_day_range: str = None,
             inflation_country: str = None,
-            selic_rate: str = None
+            selic_rate: str = None,
+            dollar_euro: str = None
     ):
         """
         DTO params
@@ -39,6 +40,7 @@ class FinancialData:
         :param regular_market_day_range: the price ranged over the day
         :param inflation_country: the country's inflation rate.
         :param selic_rate: the country's selic  rate.
+        :param dollar_euro: dollar and euro exchange rate.
         """
 
         self.currency = currency
@@ -55,3 +57,4 @@ class FinancialData:
         self.regular_market_day_range = regular_market_day_range
         self.inflation_country = inflation_country
         self.selic_rate = selic_rate
+        self.dollar_euro = dollar_euro

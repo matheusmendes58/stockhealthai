@@ -3,6 +3,7 @@
 import dearpygui.dearpygui as dpg
 from config import settings
 from controller.ai_google_controller import AiGoogleController
+from utils.dictonary import stock
 
 class ViewportUi:
 
@@ -46,6 +47,20 @@ class ViewportUi:
 
         dpg.set_value(item='information_dolar_euro_tag', value=ai_google.dto.dollar_euro)
 
+    def load_information_stock(self):
+        """
+        Load information for stock.
+
+        :return:
+        """
+
+        ai_google = AiGoogleController()
+
+        ai_google.stock_information(stock_name=stock['stock_name'])
+
+        dpg.set_value(item='stock_information_tag', value=ai_google.dto.short_name)
+
+
     def screen_viewport(self):
         """"
         Viewport screen software
@@ -66,6 +81,8 @@ class ViewportUi:
                 dpg.add_menu_item(label="selic".upper(), callback=self.selic_window_information)
 
                 dpg.add_menu_item(label="dolar e euro".upper(), callback=self.dolar_euro_window_information)
+
+                dpg.add_menu_item(label="Informação melhorada sobre a ação".upper(), callback=self.stock_window_information)
 
         self.warning_popup()
 
@@ -157,6 +174,29 @@ class ViewportUi:
             )
 
         self.load_information_dollar_euro()
+
+    def stock_window_information(self):
+        """
+        Create information window with stock
+
+        :return:
+        """
+
+        with dpg.window(
+                label="CARREGANDO INFORMAÇÕES SOBRE A AÇÃO PESQUISADA...",
+                modal=True,
+                show=True,
+                height=700,
+                width=900,
+                pos=(190, 10)
+        ):
+
+            dpg.add_text(
+                tag='stock_information_tag',
+                wrap=890
+            )
+
+        self.load_information_stock()
 
     def warning_popup(self):
         """

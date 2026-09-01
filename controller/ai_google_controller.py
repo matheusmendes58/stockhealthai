@@ -1,4 +1,4 @@
-"""Controller ai google"""
+"""Controller AI google"""
 
 from config import settings
 from services.ai.prompt import PromptIA
@@ -9,8 +9,8 @@ from models.financial_dto import FinancialData
 class AiGoogleController:
 
     def __init__(self):
-        self.prompt = PromptIA(data_text=FinancialData().short_name)
         self.dto = FinancialData()
+        self.prompt = PromptIA()
         self.chat_google = AiGoogle(api_token=settings.google_token)
 
 
@@ -32,3 +32,19 @@ class AiGoogleController:
         """
 
         self.dto.dollar_euro = self.chat_google.chat_ai_google(self.prompt.prompt_google_currency)
+
+    def stock_information(self, stock_name: str):
+        """
+        Search stock information in AI.
+
+        :return:
+        """
+
+        self.prompt.data_text = stock_name
+
+        if not stock_name:
+            self.dto.short_name = 'PESQUISE PRIMEIRO UMA AÇÃO NO CAMPO "DIGITE O NOME DA AÇÃO". '
+
+            return
+
+        self.dto.short_name = self.chat_google.chat_ai_google(self.prompt.data_text)

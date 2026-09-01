@@ -21,7 +21,8 @@ class FinancialData:
             regular_market_day_range: str = None,
             inflation_country: str = None,
             selic_rate: str = None,
-            dollar_euro: str = None
+            dollar_euro: str = None,
+            stock: str = None
     ):
         """
         DTO params
@@ -41,6 +42,7 @@ class FinancialData:
         :param inflation_country: the country's inflation rate.
         :param selic_rate: the country's selic  rate.
         :param dollar_euro: dollar and euro exchange rate.
+        :param stock: stock name e.g - MXRF11
         """
 
         self.currency = currency
@@ -58,3 +60,4 @@ class FinancialData:
         self.inflation_country = inflation_country
         self.selic_rate = selic_rate
         self.dollar_euro = dollar_euro
+        self.stock = stock

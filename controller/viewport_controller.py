@@ -1,21 +1,26 @@
 """Controller viewport """
 
 import dearpygui.dearpygui as dpg
+from models.financial_dto import FinancialData
 from views.ui.stock_search_ui import SearchUi
 from views.ui.viewport_ui import ViewportUi
 
 class ViewportController:
 
-    @staticmethod
-    def viewport_screen():
+    def __init__(self):
+
+        self.dto = FinancialData()
+
+        self.search_ui = SearchUi()
+
+        self.viewport_ui = ViewportUi()
+
+    def viewport_screen(self):
+
         dpg.create_context()
 
-        search_ui = SearchUi()
+        self.search_ui.calculate_screen_position()
 
-        search_ui.calculate_screen_position()
+        self.search_ui.screen_stock_search()
 
-        search_ui.screen_stock_search()
-
-        viewport_ui = ViewportUi()
-
-        viewport_ui.screen_viewport()
+        self.viewport_ui.screen_viewport()

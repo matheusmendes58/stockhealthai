@@ -1,10 +1,7 @@
 """UI stock search or main interface"""
 #TODO Mostrar erro na UI quando não achar ação especifica
 import dearpygui.dearpygui as dpg
-from config import settings
-from models.financial_dto import FinancialData
-from services.api.general_api_brapi import BrapiApi
-
+from controller.stock_controller import StockController
 
 class SearchUi:
     """
@@ -14,7 +11,7 @@ class SearchUi:
     def __init__(self):
         self.pos_x = 0
         self.pos_y = 0
-        self.dto = FinancialData()
+        self.stock_controller = StockController()
 
     def calculate_screen_position(
             self,
@@ -44,16 +41,18 @@ class SearchUi:
         :return:
         """
 
-        dpg.set_value(item='long_name_text', value=self.dto.long_name)
-        dpg.set_value(item='short_name_text', value=self.dto.short_name)
-        dpg.set_value(item='symbol_text', value=self.dto.symbol)
-        dpg.set_value(item='regular_market_price_text', value=self.dto.regular_market_price)
-        dpg.set_value(item='regular_market_open_text', value=self.dto.regular_market_open)
-        dpg.set_value(item='regular_market_previous_close_text', value=self.dto.regular_market_previous_close)
-        dpg.set_value(item='regular_market_day_range_text', value=self.dto.regular_market_day_range)
-        dpg.set_value(item='fifty_two_week_high_text', value=self.dto.fifty_two_week_high)
-        dpg.set_value(item='fifty_two_week_low_text', value=self.dto.fifty_two_week_low)
-        dpg.set_value(item='fifty_two_week_range_text', value=self.dto.fifty_two_week_range)
+        dto = self.stock_controller.dto
+
+        dpg.set_value(item='long_name_text', value=dto.long_name)
+        dpg.set_value(item='short_name_text', value=dto.short_name)
+        dpg.set_value(item='symbol_text', value=dto.symbol)
+        dpg.set_value(item='regular_market_price_text', value=dto.regular_market_price)
+        dpg.set_value(item='regular_market_open_text', value=dto.regular_market_open)
+        dpg.set_value(item='regular_market_previous_close_text', value=dto.regular_market_previous_close)
+        dpg.set_value(item='regular_market_day_range_text', value=dto.regular_market_day_range)
+        dpg.set_value(item='fifty_two_week_high_text', value=dto.fifty_two_week_high)
+        dpg.set_value(item='fifty_two_week_low_text', value=dto.fifty_two_week_low)
+        dpg.set_value(item='fifty_two_week_range_text', value=dto.fifty_two_week_range)
 
     def search_stock(self):
         """
@@ -62,11 +61,9 @@ class SearchUi:
         :return:
         """
 
-        api_stock = BrapiApi(token=settings.brapi_api_token)
-
         stock = dpg.get_value('input_acao')
 
-        self.dto = api_stock.get_personal_stock(tickers=stock)
+        self.stock_controller.search_stock(ticker=stock)
 
         self.set_value_in_table()
 

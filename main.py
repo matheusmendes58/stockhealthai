@@ -9,4 +9,7 @@
 from controller.viewport_controller import ViewportController
 
 if __name__ == "__main__":
-   ViewportController.viewport_screen()
+
+   viewport_controller = ViewportController()
+
+   viewport_controller.viewport_screen()

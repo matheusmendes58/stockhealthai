@@ -40,11 +40,11 @@ class AiGoogleController:
         :return:
         """
 
-        self.prompt.data_text = stock_name
-
         if not stock_name:
             self.dto.short_name = 'PESQUISE PRIMEIRO UMA AÇÃO NO CAMPO "DIGITE O NOME DA AÇÃO". '
 
             return
+
+        self.prompt.data_text = stock_name
 
         self.dto.short_name = self.chat_google.chat_ai_google(self.prompt.data_text)

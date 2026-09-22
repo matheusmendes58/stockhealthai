@@ -26,6 +26,7 @@ class AllSettings:
 
         if self.google_token and self.brapi_api_token:
             return True
+
         else:
             return False
 

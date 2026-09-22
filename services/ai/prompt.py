@@ -1,6 +1,5 @@
-# Prompt AI
-#TODO Arrumar comentario acima
-#TODO Arrumar prompt_google
+# All about Prompt for AI
+
 class PromptIA:
     """
     This class is just about PROMPT AI
@@ -13,9 +12,9 @@ class PromptIA:
         Você é um analista financeiro especialista em ações da bolsa de valores. Analise os dados da ação abaixo e 
         indique se é uma boa opção para investimento se ação está com boa saúde e indique também o quanto de redimento e
         últimos dividendo pagos pela empresa. Se possivel também traga um olhar atual do mercado financeiro e do mundo
-        e mostre se está ação irá ter lucro ou irá trazer prejuizo. 
+        e mostre se está ação irá ter lucro ou irá trazer prejuizo na lingua portuguesa. 
          
-        Dados financeiros:
+        Nome da Ação:
 
         {self.data_text}                
 

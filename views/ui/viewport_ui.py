@@ -1,5 +1,5 @@
 """UI viewport and main interface"""
-#TODO Fazer janela de informações ditas pela IA sobre ação pesquisada caso não for pesquisada antes mostre algum tipo de erro
+
 import dearpygui.dearpygui as dpg
 from config import settings
 from controller.ai_google_controller import AiGoogleController

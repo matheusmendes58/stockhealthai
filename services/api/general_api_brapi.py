@@ -4,6 +4,7 @@ from brapi import Brapi
 from brapi.types import QuoteRetrieveResponse
 from brapi.types.v2 import CurrencyRetrieveResponse, InflationRetrieveResponse, PrimeRateRetrieveResponse
 from models.financial_dto import FinancialData
+from utils.software_log import LogStockHealthAI
 from utils.custom_exceptions.brapi_exceptions import (
     GetStockError,
     GetCurrencyError,
@@ -19,6 +20,7 @@ class BrapiApi:
     def __init__(self, token: str):
 
         self.client = Brapi(api_key=token)
+        self.log = LogStockHealthAI().get_logger(__name__)
 
     def get_stock(
             self,
@@ -70,12 +72,23 @@ class BrapiApi:
         """
 
         try:
+
+            self.log.info(f'Buscando Ação - {tickers}')
+
+            if tickers == '' or tickers is None:
+
+                return FinancialData(
+                    long_name='COLOQUE O NOME DA AÇÃO CORRETAMENTE'
+                )
+
             response = self.client.quote.retrieve(
                 tickers=tickers,
                 range=period,
                 dividends=dividends,
                 fundamental=fundamental
             ).results[0]
+
+            self.log.info(f'Ação {tickers} encontrada com sucesso')
 
             return FinancialData(
                 currency=response.currency,
@@ -93,7 +106,11 @@ class BrapiApi:
             )
 
         except Exception as e:
-            raise GetStockError(ticker=tickers, original_error=e)
+            self.log.error(str(e))
+
+            #GetStockError(ticker=tickers, original_error=e)
+
+            return FinancialData(long_name=f'Não foi possivel encontrar esta ação {str(e)}')
 
     def get_currency(self, currency: str = 'USD-BRL,EUR-BRL') -> CurrencyRetrieveResponse:
         """

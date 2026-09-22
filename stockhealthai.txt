@@ -1,0 +1,5 @@
+2026-09-22 15:15:58,798 - INFO - __main__ - iniciando o projeto
+2026-09-22 15:19:44,747 - INFO - services.api.general_api_brapi - Buscando Ação - petr4
+2026-09-22 15:19:45,172 - INFO - httpx - HTTP Request: GET https://brapi.dev/api/quote/petr4?dividends=false&fundamental=true&range=3mo "HTTP/1.1 200 OK"
+2026-09-22 15:20:29,692 - INFO - google_genai.models - AFC is enabled with max remote calls: 10.
+2026-09-22 15:20:35,848 - INFO - httpx - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"

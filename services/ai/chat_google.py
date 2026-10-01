@@ -1,9 +1,16 @@
 # All about Google Gemini API
-#TODO Colocar Try Exception
+
 from google import genai
 from utils.software_log import LogStockHealthAI
 
 class AiGoogle:
+    """
+    This class is responsible for controlling Google AI
+
+    Attributes:
+        client_google (GoogleClient): Google Client object
+        log (LogStockHealthAI): Log object to store and retrieve data
+    """
 
     def __init__(self, api_token: str = None):
 

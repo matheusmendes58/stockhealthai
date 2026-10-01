@@ -7,6 +7,14 @@ from models.financial_dto import FinancialData
 
 
 class AiGoogleController:
+    """
+    This class represents the AI Google Controller.
+
+    Attributes:
+        dto (FinancialData): call data in dto class or storage data in data class.
+        prompt (PromptIA): Call AI prompt
+        chat_google (AiGoogle): Call  class AI google and your methods.
+    """
 
     def __init__(self):
         self.dto = FinancialData()

@@ -7,6 +7,10 @@ import os
 class LogStockHealthAI:
     """
     This class create a log in your project.
+
+    Attributes:
+        log_path (string): path to log file e.g. - C:\\LOGS\\
+        log_file (string): join path with name file
     """
 
     def __init__(self):

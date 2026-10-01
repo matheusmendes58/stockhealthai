@@ -6,6 +6,9 @@ from controller.ai_google_controller import AiGoogleController
 from utils.dictonary import stock
 
 class ViewportUi:
+    """
+    This class represents UI menu.
+    """
 
     def get_credentials(self):
         """

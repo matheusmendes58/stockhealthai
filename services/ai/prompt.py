@@ -3,6 +3,12 @@
 class PromptIA:
     """
     This class is just about PROMPT AI
+
+    Attributes:
+        data_text (str): text input to be inserted.
+        prompt_google (str): text (prompt) created for AI use
+        prompt_google_currency (str): text (prompt) created for AI use
+        prompt_google_selic (str): text (prompt) created for AI use
     """
 
     def __init__(self, data_text: str = None):

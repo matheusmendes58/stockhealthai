@@ -6,6 +6,11 @@ from controller.stock_controller import StockController
 class SearchUi:
     """
     This class represents UI stock search
+
+    Attributes:
+        pos_x (int): x position
+        pos_y (int): y position
+        stock_controller (StockController): call stock controller
     """
 
     def __init__(self):

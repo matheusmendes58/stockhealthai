@@ -1,6 +1,14 @@
 
 
 class GetStockError(Exception):
+    """
+    This exception is raised when a stock error occurs
+
+    Attributes:
+        ticker (str): stock name
+        original_error (Exception): original error
+        message (str): error message
+    """
 
     def __init__(self, ticker: str, original_error: Exception):
         self.ticker = ticker
@@ -10,6 +18,13 @@ class GetStockError(Exception):
         super().__init__(self.message)
 
 class GetCurrencyError(Exception):
+    """
+    This exception is raised when a currency error occurs
+
+    Attributes:
+        original_error (Exception): original error
+        message (str): error message
+    """
 
     def __init__(self, original_error: Exception):
         self.original_error = original_error
@@ -18,6 +33,13 @@ class GetCurrencyError(Exception):
         super().__init__(self.message)
 
 class GetInflationError(Exception):
+    """
+    This exception is raised when as inflation error occurs
+
+    Attributes:
+        original_error (Exception): original error
+        message (str): error message
+    """
 
     def __init__(self, original_error: Exception):
         self.original_error = original_error
@@ -26,6 +48,13 @@ class GetInflationError(Exception):
         super().__init__(self.message)
 
 class GetSelicError(Exception):
+    """
+    This exception is raised when a selic error occurs
+
+    Attributes:
+        original_error (Exception): original error
+        message (str): error message
+    """
 
     def __init__(self, original_error: Exception):
         self.original_error = original_error

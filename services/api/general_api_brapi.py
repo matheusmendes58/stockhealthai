@@ -15,6 +15,10 @@ from utils.custom_exceptions.brapi_exceptions import (
 class BrapiApi:
     """
     This class represents Brapi API config and more.
+
+    Attributes:
+        client (brapi): brapi object
+        log (LogStockHealthAI): Log object to store and retrieve data
     """
 
     def __init__(self, token: str):

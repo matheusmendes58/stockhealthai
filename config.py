@@ -1,12 +1,15 @@
-#All settings in project is here example passwords, string connections, etc
+"""All settings in project is here example passwords, string connections, etc"""
 
 import os
 
 
 class AllSettings:
     """
-    General settings from application
+    General settings from application.
 
+    Attributes:
+        google_token (str): Google API Token
+        brapi_api_token (str): BRAPI API Token
     """
 
     def __init__(self):

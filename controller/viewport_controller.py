@@ -6,6 +6,9 @@ from views.ui.stock_search_ui import SearchUi
 from views.ui.viewport_ui import ViewportUi
 
 class ViewportController:
+    """
+    This class represents the dearpygui viewport.
+    """
 
     def __init__(self):
 

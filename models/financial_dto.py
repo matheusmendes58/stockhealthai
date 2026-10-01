@@ -3,6 +3,25 @@
 class FinancialData:
     """
     This class is a general DTO data from project
+
+    Attributes:
+        currency (str): currency country
+        fifty_two_week_high (float): highest price in the last two weeks
+        fifty_two_week_low (float): lowest price in the last two weeks
+        fifty_two_week_range (str): highest price in the last two weeks
+        logo_url (str): url from logotype stock
+        long_name (str): long name from stock
+        short_name (str): short name from stock
+        symbol (str): symbol name from stock
+        regular_market_open (float): highest price in the last two weeks
+        regular_market_previous_close (float): highest price in the last two weeks
+        regular_market_price (float): price of stock
+        regular_market_day_range (str): highest price in the last two weeks
+        inflation_country (str): country's inflation rate
+        selic_rate (str): country's selic rate
+        dollar_euro (str): dollar and euro exchange rate
+        stock (str): stock name e.g - MXRF11
+
     """
 
     def __init__(
@@ -24,26 +43,6 @@ class FinancialData:
             dollar_euro: str = None,
             stock: str = None
     ):
-        """
-        DTO params
-
-        :param currency: currency country
-        :param fifty_two_week_high: the highest price in the last two weeks
-        :param fifty_two_week_low: the lowest price in the last two weeks
-        :param fifty_two_week_range: the price ranged over the last two weeks
-        :param logo_url: url from logotype stock
-        :param long_name: long name from stock e.g - Maxi Renda Fundo de Investimento Imobiliario Cotas
-        :param short_name: short name from stock e.g - MXRF11
-        :param symbol: symbol name from stock e.g - MXRF11
-        :param regular_market_open: the stock's opening price.
-        :param regular_market_previous_close: the stock's closing price.
-        :param regular_market_price: price of stock
-        :param regular_market_day_range: the price ranged over the day
-        :param inflation_country: the country's inflation rate.
-        :param selic_rate: the country's selic  rate.
-        :param dollar_euro: dollar and euro exchange rate.
-        :param stock: stock name e.g - MXRF11
-        """
 
         self.currency = currency
         self.fifty_two_week_high = fifty_two_week_high

@@ -6,6 +6,12 @@ from config import settings
 from utils.dictonary import stock
 
 class StockController:
+    """
+    Class for stock controller
+
+    Attributes:
+        dto (FinancialData): call data in dto class or storage data in data class.
+    """
 
     def __init__(self):
         self.dto = FinancialData()

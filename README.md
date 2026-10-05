@@ -89,7 +89,7 @@ Ter uma interface grafica para auxiliar o úsuario na busca de ações financeir
 
 ---
 
-## Arquitetura visualmente em texto simples
+## Arquitetura visual em texto simples
 
                     ┌──────────────────┐
                     │      main.py     │
